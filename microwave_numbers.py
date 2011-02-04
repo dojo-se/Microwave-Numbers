@@ -2,14 +2,14 @@ import unittest
 
 KEYBOARD = ((1, 2, 3), (4, 5, 6), (7, 8, 9), (None, 0, '*'))
 
-def position(number):
+def _position(number):
     for row, col in enumerate(KEYBOARD):
         try:
             return row, col.index(int(number))
         except ValueError:
             pass
     
-def steps_between(position_initial, position_final):
+def _steps_between(position_initial, position_final):
     effort_between_rows = abs(position_initial[0] - position_final[0])
     effort_between_cols = abs(position_initial[1] - position_final[1])
     return effort_between_cols + effort_between_rows
@@ -17,21 +17,21 @@ def steps_between(position_initial, position_final):
 def microwave_numbers(seconds):
     s_distance = []
     for i in str(seconds):
-        s_distance.append(position(i))
+        s_distance.append(_position(i))
 
     s_effort = 0
     for j in range(len(s_distance)-1):
-        s_effort += steps_between(s_distance[j], s_distance[j+1])
+        s_effort += _steps_between(s_distance[j], s_distance[j+1])
     
     minutes = reduce(lambda x,y: x*100+y, divmod(seconds, 60))
     
     m_distance = []
     for i in str(minutes):
-        m_distance.append(position(i))
+        m_distance.append(_position(i))
 
     m_effort = 0
     for j in range(len(m_distance)-1):
-        m_effort += steps_between(m_distance[j], m_distance[j+1])
+        m_effort += _steps_between(m_distance[j], m_distance[j+1])
     
     if s_effort < m_effort:
         return seconds
