@@ -23,10 +23,7 @@ def microwave_numbers(seconds):
     for j in range(len(s_distance)-1):
         s_effort += steps_between(s_distance[j], s_distance[j+1])
     
-    minutes, seconds = divmod(seconds, 60)
-    minutes_armengation = minutes
-    minutes = minutes * 100
-    minutes = minutes + seconds
+    minutes = reduce(lambda x,y: x*100+y, divmod(seconds, 60))
     
     m_distance = []
     for i in str(minutes):
@@ -37,10 +34,9 @@ def microwave_numbers(seconds):
         m_effort += steps_between(m_distance[j], m_distance[j+1])
     
     if s_effort < m_effort:
-        return seconds + 60*minutes_armengation
+        return seconds
     else:
         return minutes
-    #return 99
 
 class TestMicroWaveNumbers(unittest.TestCase):
     def test_99(self):
@@ -49,6 +45,10 @@ class TestMicroWaveNumbers(unittest.TestCase):
         self.assertEqual(111, microwave_numbers(71))
     def test_1(self):
         self.assertEqual(1, microwave_numbers(1))
+    def test_120(self):
+        self.assertEqual(200, microwave_numbers(120))
+    def test_123(self):
+        self.assertEqual(123, microwave_numbers(123))
 
 if __name__ == '__main__':
     unittest.main()
