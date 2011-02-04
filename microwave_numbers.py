@@ -33,10 +33,7 @@ def microwave_numbers(seconds):
     for j in range(len(m_distance)-1):
         m_effort += _steps_between(m_distance[j], m_distance[j+1])
     
-    if s_effort < m_effort:
-        return seconds
-    else:
-        return minutes
+    return s_effort < m_effort and seconds or minutes
 
 class TestMicroWaveNumbers(unittest.TestCase):
     def test_99(self):
