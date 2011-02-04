@@ -10,25 +10,45 @@ def position(number):
             pass
     
 def steps_between(position_initial, position_final):
-    return None
+    effort_between_rows = abs(position_initial[0] - position_final[0])
+    effort_between_cols = abs(position_initial[1] - position_final[1])
+    return effort_between_cols + effort_between_rows
     
 def microwave_numbers(seconds):
     s_distance = []
     for i in str(seconds):
         s_distance.append(position(i))
+
+    s_effort = 0
+    for j in range(len(s_distance)-1):
+        s_effort += steps_between(s_distance[j], s_distance[j+1])
     
     minutes, seconds = divmod(seconds, 60)
+    minutes_armengation = minutes
     minutes = minutes * 100
     minutes = minutes + seconds
+    
     m_distance = []
     for i in str(minutes):
         m_distance.append(position(i))
+
+    m_effort = 0
+    for j in range(len(m_distance)-1):
+        m_effort += steps_between(m_distance[j], m_distance[j+1])
     
-    return 99
+    if s_effort < m_effort:
+        return seconds + 60*minutes_armengation
+    else:
+        return minutes
+    #return 99
 
 class TestMicroWaveNumbers(unittest.TestCase):
     def test_99(self):
         self.assertEqual(99, microwave_numbers(99))
+    def test_71(self):
+        self.assertEqual(111, microwave_numbers(71))
+    def test_1(self):
+        self.assertEqual(1, microwave_numbers(1))
 
 if __name__ == '__main__':
     unittest.main()
