@@ -23,7 +23,7 @@ def microwave_numbers(seconds):
     for j in range(len(s_distance)-1):
         s_effort += _steps_between(s_distance[j], s_distance[j+1])
     
-    minutes = reduce(lambda x,y: x*100+y, divmod(seconds, 60))
+    minutes = (lambda x,y: x*100+y)(*divmod(seconds, 60))
     
     m_distance = []
     for i in str(minutes):
