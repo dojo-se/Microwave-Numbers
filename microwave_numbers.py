@@ -49,6 +49,8 @@ class TestMicroWaveNumbers(unittest.TestCase):
         self.assertEqual(200, microwave_numbers(120))
     def test_123(self):
         self.assertEqual(123, microwave_numbers(123))
+    def test_600(self):
+        self.assertEqual(600, microwave_numbers(600))
 
 if __name__ == '__main__':
     unittest.main()
