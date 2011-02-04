@@ -3,9 +3,9 @@ import unittest
 KEYBOARD = ((1, 2, 3), (4, 5, 6), (7, 8, 9), (None, 0, '*'))
 
 def position(number):
-    for index, tuple_ in enumerate(KEYBOARD):
+    for row, col in enumerate(KEYBOARD):
         try:
-            return (index, tuple_.index(number))
+            return row, col.index(int(number))
         except ValueError:
             pass
     
@@ -23,7 +23,7 @@ def microwave_numbers(seconds):
     m_distance = []
     for i in str(minutes):
         m_distance.append(position(i))
-    print s_distance, m_distance
+    
     return 99
 
 class TestMicroWaveNumbers(unittest.TestCase):
